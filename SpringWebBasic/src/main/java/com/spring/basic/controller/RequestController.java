@@ -112,6 +112,7 @@ public class RequestController {
 	 	특정 검증 로직이나 비즈니스 로직을 수행할 수 있음.
 	 	(VO보다는 역할이 조금 더 많고, 특정 목적을 가진 객체)
 	 	
+	 	
 	 */
 	
 	@PostMapping("/join")

@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	<!-- DispatcherServlet 광녈 설정들이 모여 있는 xml 파일 -->
+	<!-- DispatcherServlet 관련 설정들이 모여 있는 xml 파일 -->
 		
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<!-- 핸들러 어댑터, 핸들러 매핑 객체가

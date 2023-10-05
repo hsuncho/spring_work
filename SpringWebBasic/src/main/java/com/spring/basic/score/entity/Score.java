@@ -23,10 +23,10 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Score {
 	
+	private int stuNum; //student number
 	private String stuName; //학생 이름
 	private int kor, eng, math; // Korean/ English/ math score
 	
-	private int stuNum; //student number
 	private int total;
 	private double average;
 	private Grade grade;
