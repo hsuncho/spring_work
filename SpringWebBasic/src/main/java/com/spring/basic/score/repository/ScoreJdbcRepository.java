@@ -37,7 +37,6 @@ public class ScoreJdbcRepository implements IScoreRepository {
 		}
 	}
 	
-	
 	@Override
 	public List<Score> findAll() {
 		
@@ -142,18 +141,53 @@ public class ScoreJdbcRepository implements IScoreRepository {
 
 	@Override
 	public Score findByStuNum(int stuNum) {
-		return null;
+		
+		String sql = "SELECT * FROM score WHERE stu_num = ?";
+
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, stuNum);
+			
+			rs = pstmt.executeQuery();
+			
+			new Score(
+					rs.getInt("stu_num"),
+					rs.getString("stu_name"),
+					rs.getInt("kor"),
+					rs.getInt("eng"),
+					rs.getInt("math"),
+					rs.getInt("total"),
+					rs.getDouble("average"),
+					Grade.valueOf(rs.getString("grade"))
+					);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+			return null;
+		
 	}
 
 	@Override
 	public void deleteByStuNum(int stuNum) {
 		
+		String sql = "DELETE FROM score WHERE stu_num = ?";
+		
 		try {
 			
-			String sql = "DELETE FROM score WHERE stu_num = ?";
-			
 			conn = DriverManager.getConnection(url, username, password);
-			
+			conn.setAutoCommit(false); //오토커밋 취소
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, stuNum);
@@ -164,6 +198,7 @@ public class ScoreJdbcRepository implements IScoreRepository {
 				System.out.println("DELETE 성공!");
 			} else {
 				System.out.println("DELETE 실패!");
+				conn.rollback();
 			}
 			
 		} catch (Exception e) {
@@ -182,7 +217,7 @@ public class ScoreJdbcRepository implements IScoreRepository {
 
 	@Override
 	public void modify(Score modScore) {
-
+		
 	}
 
 }
