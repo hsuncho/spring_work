@@ -2,6 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
 Servers/
+
+properties/
+
 ### Eclipse ###
 .metadata
 bin/
