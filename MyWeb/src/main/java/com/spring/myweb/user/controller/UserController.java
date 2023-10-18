@@ -1,5 +1,7 @@
 package com.spring.myweb.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/user")
-@RequiredArgsConstructor
+@RequiredArgsConstructor()
 public class UserController {
 
 	private final UserService service;
@@ -26,9 +28,7 @@ public class UserController {
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/userJoin")
-	public void userJoin() {
-		
-	}
+	public void userJoin() {}
 	
 	//아이디 중복 확인(비동기)
 	/*
@@ -81,8 +81,18 @@ public class UserController {
 	//로그인 요청
 	@PostMapping("/userLogin")
 	public void login(String userId, String userPw, Model model) {
-		service.login(userId);
+		System.out.println("나는 UserController의 login이다!!!");
+		model.addAttribute("result", service.login(userId, userPw)); //send id info or null as 'result'	
 	}
+	
+	//마이페이지 이동 요청
+	@GetMapping("/userMypage")
+	public void userMypage(HttpSession session, Model model) {
+		//마이페이지는 로그인한 사람만 이동 가능 -> 세션에 아이디가 있다!
+		String id = (String) session.getAttribute("login");
+		model.addAttribute("userInfo", service.getInfo(id));
+	}
+	
+	
 }
-
 
