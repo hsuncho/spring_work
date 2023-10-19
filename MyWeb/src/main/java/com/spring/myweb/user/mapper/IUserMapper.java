@@ -5,6 +5,7 @@ import com.spring.myweb.user.entity.User;
 public interface IUserMapper {
 	
 	//아이디 중복 확인
+	
 	int idCheck(String id);
 	
 	//회원 가입
