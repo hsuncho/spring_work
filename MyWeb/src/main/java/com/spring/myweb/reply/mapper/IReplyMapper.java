@@ -35,7 +35,7 @@ public interface IReplyMapper {
 	String pwCheck(int rno);
 	
 	//댓글 수정
-	void modify(Reply reply);
+	void update(Reply reply);
 	
 	//댓글 삭제
 	void delete(int rno);
