@@ -146,7 +146,7 @@ public class SnsBoardController {
 	
 	@GetMapping("/content/{bno}")
 	public ResponseEntity<?> getDetail(@PathVariable int bno) {
-		return ResponseEntity.ok().body(service.getDetail(bno));
+		return ResponseEntity.ok().body(service.getDetail(bno)); //속성은 header에 응답 정보는 body에 담아서 줘
 	}
 	
 	@DeleteMapping("/{bno}")
@@ -179,6 +179,16 @@ public class SnsBoardController {
 		log.info("/like: POST, params: {}", params);
 		return service.searchLike(params);
 	}
+	
+	//회원이 글 목록으로 진입 시 좋아요 게시물 리스트 체크
+	@GetMapping("/likeList/{userId}")
+	public List<Integer> likeList(@PathVariable String userId) {
+		log.info("/snsboard/likeList: GET, userId: {}", userId);
+		return service.likeList(userId);
+	}
+	
+	
+	
 	
 	
 	
